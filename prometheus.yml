@@ -20,10 +20,12 @@ rule_files:
 # Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: "services"
+  - job_name: "services-test"
     relabel_configs:
       - source_labels: [__meta_docker_port_private]
         regex: '9182'
         action: keep
+        - source_labels: [__meta_docker_container_name]
+        target_label: container_name
     docker_sd_configs:
       - host: npipe:////./pipe/docker_engine
