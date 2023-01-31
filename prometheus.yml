@@ -25,4 +25,4 @@ scrape_configs:
       - source_labels: [__meta_docker_port_private]
         target_label: port
     docker_sd_configs:
-      - host: npipe:////./pipe/docker_engine_windows
+      - host: npipe:////./pipe/docker_engine
