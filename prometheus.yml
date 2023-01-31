@@ -23,13 +23,13 @@ scrape_configs:
   - job_name: "services-test"
     relabel_configs:
       - source_labels: [__meta_docker_port_private]
-        regex: '9182'
+        regex: '9090'
         action: keep
       - source_labels: [__meta_docker_container_name]
         target_label: container_name
-      - source_labels: [__meta_docker_container_name]
-        regex: '(.*)-\w*$'
+      - source_labels: [container_name]
+        regex: (.*)+(-\w*)?$
         target_label:  project
-        replacement:   ${1}
+        replacement: ${1}
     docker_sd_configs:
       - host: npipe:////./pipe/docker_engine
