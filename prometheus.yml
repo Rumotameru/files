@@ -28,8 +28,12 @@ scrape_configs:
       - source_labels: [__meta_docker_container_name]
         target_label: container_name
       - source_labels: [container_name]
-        regex: (.*)+(-\w*)?$
+        regex: \/*(.*)?-(\w*)?$
         target_label:  project
         replacement: ${1}
+      - source_labels: [container_name]
+        regex: \/*(.*)?-(\w*)?$
+        target_label:  commit
+        replacement: ${2}
     docker_sd_configs:
       - host: npipe:////./pipe/docker_engine
